@@ -7,10 +7,16 @@ file(GLOB SOURCES "micro/*.cpp")
 
 add_executable(micro ${SOURCES})
 
-target_include_directories(micro PRIVATE ${CMAKE_SOURCE_DIR}/source)
+target_include_directories(micro PUBLIC ${CMAKE_SOURCE_DIR}/micro)
+
+include(FindVulkan)
+if(NOT VULKAN_FOUND)
+    message(FATAL_ERROR "Vulkan SDK not installed.")
+endif()
 
 add_subdirectory(glfw)
 add_subdirectory(glm)
-add_subdirectory(vkheaders)
 
-target_link_libraries(micro glfw glm Vulkan::Headers ${GLFW_LIBRARIES})
+target_compile_features(micro PRIVATE cxx_std_17)
+
+target_link_libraries(micro glfw glm Vulkan::Vulkan ${GLFW_LIBRARIES})
