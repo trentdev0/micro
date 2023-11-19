@@ -11,6 +11,6 @@ target_include_directories(micro PRIVATE ${CMAKE_SOURCE_DIR}/source)
 
 add_subdirectory(glfw)
 add_subdirectory(glm)
-add_subdirectory(Vulkan-Headers)
+add_subdirectory(vkheaders)
 
 target_link_libraries(micro glfw glm Vulkan::Headers ${GLFW_LIBRARIES})
